@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class HomeController extends Controller
 {
     /**
@@ -13,19 +11,21 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-   $this->middleware(['auth','verified']);
-     
 
-       }
+        $this->middleware(['auth','verified']);
+        
+    }
 
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\View\View
      */
     public function index()
     {
-       
-        return view('home');
+        return view('dashboard');
     }
+
+    
 }
+
