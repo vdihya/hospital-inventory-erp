@@ -51,3 +51,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
+Route::get('/formpurchaseinfo','PurchaseController@show')->name('formpurchaseinfo');;
+
+Route::post('/purchasedetails','PurchaseController@store')->name('purchasedetails');;
