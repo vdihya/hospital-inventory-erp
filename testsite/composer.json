@@ -10,9 +10,11 @@
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
+        "kyslik/column-sortable": "^6.2",
         "laravel-frontend-presets/argon": "^1.0",
         "laravel/tinker": "^2.0",
-        "mews/captcha": "^3.0"
+        "mews/captcha": "^3.0",
+        "yajra/laravel-datatables": "1.5"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

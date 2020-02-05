@@ -31,14 +31,26 @@
 							        <input class="form-control" id="date" name="date" placeholder="Order Date" type="text"/>
 							    </div>
 							</div>
-							<div class="form-group">
-							    <div class="input-group input-group-alternative">
-							        <div class="input-group-prepend">
-							            <span class="input-group-text"><i class="ni ni-box-2"></i></span>
-							        </div>
-							        <input class="form-control" name="ordno" placeholder="Purchase Order Number" type="text"/>
-							    </div>
-							</div>
+							
+
+							<div class="form-group{{ $errors->has('ordno') ? ' has-danger' : '' }}">
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-box-2"></i></span>
+                                    </div>
+                                    <input class="form-control{{ $errors->has('ordno') ? ' is-invalid' : '' }}" placeholder="{{ __('Order Number') }}" type="text" name="ordno" value="{{ old('ordno') }}" required autofocus>
+                                </div>
+                                @if ($errors->has('ordno'))
+                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                        <strong>{{ $errors->first('ordno') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+
+
+
+
 
 							<div class="form-group">
 							    <div class="input-group input-group-alternative">

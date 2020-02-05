@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePurchaseOrdersTable extends Migration
+class PurchaseOrders extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreatePurchaseOrdersTable extends Migration
     public function up()
     {
         Schema::create('purchase_orders', function (Blueprint $table) {
-            $table->text('ordno');
+            $table->text('ordno')->unique();
             $table->date('date');
             $table->integer('bolno');
             $table->integer('invoiceno');
@@ -25,6 +25,7 @@ class CreatePurchaseOrdersTable extends Migration
             
             $table->text('status')->default('open');
             $table->timestamp('added_at')->useCurrent();
+            $table->text('added_by');
        
         });
     }

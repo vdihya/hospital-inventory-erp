@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\PurchaseOrder;
 
 Route::get('/', function () {
     return view('welcome');
@@ -54,3 +55,9 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/formpurchaseinfo','PurchaseController@show')->name('formpurchaseinfo');;
 
 Route::post('/purchasedetails','PurchaseController@store')->name('purchasedetails');;
+
+Route::get('/purchases','PurchaseController@view')->name('purchases');
+
+Route::any('/search','PurchaseController@search')->name('search');
+
+Route::get('/close_order/{ordno?}', 'PurchaseController@closeOrder')->name('close_order');
