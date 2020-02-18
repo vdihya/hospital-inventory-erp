@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'bg-primary'])
 
 @section('content')
-<div class="header bg-gradient-danger py-7 py-lg-8">
+<div class="header bg-gradient-dark py-7 py-lg-8">
         <div class="container">
                     <div class="col-lg-5 col-md-6">
                         <h1 class="text-white">Recent Purchase orders</h1>
@@ -179,7 +179,7 @@
                         </div>
                    </td>
                     <td class="date"> {{$row['date']}}</td>
-                    <td> {{$row['ordno']}}</td>
+                    <td><b> {{$row['ordno']}}<b></td>
                     <td> {{$row['bolno']}}</td>
                     <td> {{$row['invoiceno']}}</td>
                     <td> {{$row['customer']}}</td>
@@ -211,6 +211,24 @@
 
         </div>
     </div>
+    <div class="container">
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-dark"><a href="/purchases">View original data</a></button>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-dark"><a href="/pdf">Export into PDF</a></button>
+        </div>
+         <div class="col">
+            <button type="button" class="btn btn-dark"><a href="/purchases">Export into excel</a></button>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-dark"><a href="/purchases">Export into csv</a></button>
+        </div>
+        
+        
+    </div>
+</div>
 </div>
 
         <div class="separator separator-bottom separator-skew zindex-100">

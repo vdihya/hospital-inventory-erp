@@ -16,10 +16,10 @@ class PurchaseOrders extends Migration
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->text('ordno')->unique();
             $table->date('date');
-            $table->integer('bolno');
-            $table->integer('invoiceno');
-            $table->text('customer');
-            $table->text('distributor');
+            $table->integer('bolno')->nullable();
+            $table->integer('invoiceno')->nullable();
+            $table->text('customer')->nullable();
+            $table->text('distributor')->nullable();
             $table->text('soldto');
              $table->text('type');
             

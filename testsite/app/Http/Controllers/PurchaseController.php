@@ -5,6 +5,7 @@ use DataTables;
 use Illuminate\Http\Request;
 use App\PurchaseOrder;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class PurchaseController extends Controller
 {
@@ -114,4 +115,75 @@ class PurchaseController extends Controller
       return redirect('/purchases');
         }
 
+        function get_purchase_orders()
+        {
+          $purchase_orders = PurchaseOrder::get();
+          return $purchase_orders;
+        }
+
+        function pdf()
+        {
+          $pdf = \App::make('dompdf.wrapper');
+          $pdf-> loadHTML($this->convert_purchase_orders());
+          return $pdf->stream();
+        }
+        function convert_purchase_orders()
+        {
+          $purchase_orders = $this->get_purchase_orders();
+          $output = '
+                    <table style="border-collapse:collapse; border:1px;">
+                        <tr>
+                             <th style="border:1px solid; padding:3px;">
+                              Order date
+                            </th>
+                             <th style="border:1px solid; padding:3px;">
+                              PO No. 
+                            </th>
+                             <th style="border:1px solid; padding:3px;">
+                              BOL No. 
+                               </th>
+                             <th style="border:1px solid; padding:3px;">
+                                Invoice No.
+                                </th>
+                             <th style="border:1px solid; padding:3px;">
+                                Customer
+                            </th>
+                             <th style="border:1px solid; padding:3px;">
+                                Distributor
+                            </th>
+                             <th style="border:1px solid; padding:3px;">
+                                Sold to
+                                  </th>
+                             <th style="border:1px solid; padding:3px;">
+                               Status  
+                            </th>
+                             <th style="border:1px solid; padding:3px;">
+                              Type
+                            </th>
+                            
+                        </tr>
+                    </thead>';
+                    foreach($purchase_orders as $orders)
+                    {
+                      $output .= '
+                <tr text-align-center>
+                     <td>' .$orders->date.' </td>
+                    <td><b>' .$orders->ordno. '<b></td>
+                    <td>' .$orders->bolno. '</td>
+                    <td>' .$orders->invoiceno.'</td>
+                    <td>' .$orders->customer. '</td>
+                    <td>' .$orders->distributor. '</td>
+                    <td>' .$orders->soldto. '</td>
+                    <td>' .$orders->status. '</td>
+                    <td>' .$orders->type. '</td>
+                    
+
+                   
+                </tr>';
+        }
+        $output.= '</table>';
+        return $output;
+
+
+}
 }

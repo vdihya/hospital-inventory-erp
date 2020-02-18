@@ -61,3 +61,5 @@ Route::get('/purchases','PurchaseController@view')->name('purchases');
 Route::any('/search','PurchaseController@search')->name('search');
 
 Route::get('/close_order/{ordno?}', 'PurchaseController@closeOrder')->name('close_order');
+
+Route::get('/pdf','PurchaseController@pdf')->name('pdf');

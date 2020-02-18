@@ -52,14 +52,21 @@
 
 
 
-							<div class="form-group">
+							<div class="form-group{{ $errors->has('bolno') ? ' has-danger' : '' }}">
 							    <div class="input-group input-group-alternative">
 							        <div class="input-group-prepend">
 							            <span class="input-group-text"><i class="ni ni-bullet-list-67"></i></span>
 							        </div>
-							        <input class="form-control" name="bolno" placeholder="BOL (Bill Of Lading) Number" type="text"/>
+							        <input class="form-control{{ $errors->has('bolno') ? ' is-invalid' : '' }}" name="bolno" placeholder="BOL (Bill Of Lading) Number" type="text" value="{{ old('bolno') }}"/>
 							    </div>
+							    @if ($errors->has('bolno'))
+                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                        <strong>{{ $errors->first('bolno') }}</strong>
+                                    </span>
+                                @endif
 							</div>
+
+
 							<div class="form-group">
 							    <div class="input-group input-group-alternative">
 							        <div class="input-group-prepend">
@@ -89,7 +96,7 @@
 							        <div class="input-group-prepend">
 							            <span class="input-group-text"><i class="ni ni-money-coins"></i></span>
 							        </div>
-							        <input class="form-control" name="soldto" placeholder="Sold to" type="text"/>
+							        <input class="form-control" name="soldto" placeholder="Sold to" type="text" required autofocus/>
 							    </div>
 							</div>
 							<div class="form-group">
@@ -97,7 +104,7 @@
 							        <div class="input-group-prepend">
 							            <span class="input-group-text"><i class="ni ni-archive-2"></i></span>
 							        </div>
-							        <input class="form-control" name="type" placeholder="Type" type="text"/>
+							        <input class="form-control" name="type" placeholder="Type" type="text" required autofocus/>
 							    </div>
 							</div>
 

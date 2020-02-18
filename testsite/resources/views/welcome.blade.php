@@ -6,7 +6,7 @@
             <div class="header-body text-center mt-7 mb-7">
                 <div class="row justify-content-center">
                     <div class="col-lg-5 col-md-6">
-                        <h1 class="text-white">a built for you! report generator</h1>
+                        <h1 class="text-white">A purchase order recording tool </h1>
                     </div>
                 </div>
             </div>
