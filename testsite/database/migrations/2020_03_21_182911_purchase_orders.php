@@ -21,11 +21,15 @@ class PurchaseOrders extends Migration
             $table->text('customer')->nullable();
             $table->text('distributor')->nullable();
             $table->text('soldto');
-             $table->text('type');
+            $table->text('type');
             
             $table->text('status')->default('open');
             $table->timestamp('added_at')->useCurrent();
             $table->text('added_by');
+
+            $table->integer('units');
+            $table->string('productid',8);
+           $table->foreign('productid')->references('productid')->on('product_details')->onDelete('cascade');
        
         });
     }
@@ -40,3 +44,5 @@ class PurchaseOrders extends Migration
         Schema::dropIfExists('purchase_orders');
     }
 }
+
+

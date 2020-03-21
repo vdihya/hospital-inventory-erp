@@ -78,29 +78,66 @@
                     <a class="nav-link" href="{{ route('home') }}">
                         <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
                     </a>
-                    <a class="nav-link" href="{{ route('formpurchaseinfo') }}">
-                        <i class="ni ni-cart text-primary"></i> {{ __('Add Purchase Order') }}
+                    
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#navbar-products" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-products">
+                        <i class="ni ni-box-2 text-primary"></i>
+                        <span class="nav-link-text">{{ __('Products') }}</span>
                     </a>
-                    <a class="nav-link" href="{{ route('purchases') }}">
-                        <i class="ni ni-bullet-list-67"></i> {{ __('Recent Purchase Orders') }}
+
+                    <div class="collapse show" id="navbar-products">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('addProduct') }}">
+                                    <i class="ni ni-fat-add text-primary"></i> {{ __('Add Product') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('viewProducts') }}">
+                                     <i class="ni ni-bullet-list-67"></i> {{ __('View Products') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#navbar-orders" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-orders">
+                        <i class="ni ni-money-coins text-primary"></i>
+                        <span class="nav-link-text">{{ __('Orders') }}</span>
                     </a>
+
+                    <div class="collapse show" id="navbar-orders">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('formpurchaseinfo') }}">
+                                    <i class="ni ni-cart text-primary"></i> {{ __('Record Order') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('purchases') }}">
+                                     <i class="ni ni-bullet-list-67"></i> {{ __('View Orders') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
-                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Edit User details') }}</span>
+                        <i class="ni ni-single-copy-04 text-primary"></i>
+                        <span class="nav-link-text">{{ __('Reports') }}</span>
                     </a>
 
                     <div class="collapse show" id="navbar-examples">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('profile.edit') }}">
-                                    {{ __('User profile') }}
+                                <a class="nav-link" href="{{ route('reportForm') }}">
+                                  <i class="ni ni-active-40 text-primary"></i>    {{ __('Create Report') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">
-                                    {{ __('User Management') }}
+                                <a class="nav-link" href="{{ route('showReport') }}">
+                                   <i class="ni ni-sound-wave text-dark"></i> {{ __('View Reports') }}
                                 </a>
                             </li>
                         </ul>

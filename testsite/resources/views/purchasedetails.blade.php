@@ -119,7 +119,7 @@
         
 
         <div class="container col-md-12">
-            <div class="table-static">
+            <div class="table-responsive">
                 <table class="table align-items-center table-light">
                     <thead class="thead-light">
                         <tr>
@@ -167,14 +167,14 @@
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                           <div class="dropdown-menu">
-                            <div class="dropdown-item bg-gradient-primary">
+                            <div class="dropdown-item">
 
                                 <span>Added by</span>
                                 <i class="ni ni-single-02"><b> {{$row->added_by}}</b></i>
                                 
 
                             </div>
-                            <a class="dropdown-item bg-gradient-danger" href="/close_order?ordno=<?php echo $row->ordno ?>">Close Order</a>
+                            <a class="dropdown-item" href="/close_order?ordno=<?php echo $row->ordno ?>">Close Order</a>
                          
                         </div>
                    </td>
@@ -219,12 +219,7 @@
         <div class="col">
             <button type="button" class="btn btn-dark"><a href="/pdf">Export into PDF</a></button>
         </div>
-         <div class="col">
-            <button type="button" class="btn btn-dark"><a href="/purchases">Export into excel</a></button>
-        </div>
-        <div class="col">
-            <button type="button" class="btn btn-dark"><a href="/purchases">Export into csv</a></button>
-        </div>
+        
         
         
     </div>

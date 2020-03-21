@@ -86,4 +86,7 @@ class CaptchaController extends Controller
     {
         return response()->json(['captcha' => captcha_img()]);
     }
+
+   
+
 }

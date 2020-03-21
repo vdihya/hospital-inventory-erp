@@ -9,7 +9,7 @@ use PDF;
 
 class PurchaseController extends Controller
 {
-
+   
   public function __construct()
     {
 
@@ -46,7 +46,7 @@ class PurchaseController extends Controller
         $order->added_by=Auth::user()->name;
         $order->save();
 
-      return redirect('/home');
+      return redirect('/purchases');
     }
     public function view()
     {
@@ -112,7 +112,7 @@ class PurchaseController extends Controller
                 
                 PurchaseOrder::where('ordno',$request->ordno)->update(array('status' => 'closed'));
 
-      return redirect('/purchases');
+                 return redirect('/purchases');
         }
 
         function get_purchase_orders()
@@ -127,6 +127,8 @@ class PurchaseController extends Controller
           $pdf-> loadHTML($this->convert_purchase_orders());
           return $pdf->stream();
         }
+
+
         function convert_purchase_orders()
         {
           $purchase_orders = $this->get_purchase_orders();
@@ -180,10 +182,45 @@ class PurchaseController extends Controller
 
                    
                 </tr>';
-        }
+                    }
         $output.= '</table>';
         return $output;
 
 
+        }
+
+        public static function getPO()
+{
+
+  $POno = PurchaseOrder::orderByRaw('ordno DESC')->value('ordno');
+  list($alpha,$numeric) = sscanf($POno, "%[A-Z]%d");
+  return $alpha . ((int)$numeric+1);
 }
+
+        public static function getInvoice()
+{
+
+  $invoiceno = PurchaseOrder::orderByRaw('invoiceno DESC')->value('invoiceno');
+  return ($invoiceno +1);
 }
+
+        public static function getBol()
+{
+
+  $bolno = PurchaseOrder::orderByRaw('bolno DESC')->value('bolno');
+  return ($bolno+1);
+}
+
+      public static function getCustomers()
+      {
+        return  PurchaseOrder::groupBy('customer')->get()->filter();
+       }
+
+       public static function getDistributors()
+       {
+         return PurchaseOrder::groupBy('distributor')->get()->filter();
+     
+       }
+
+}
+

@@ -1,3 +1,4 @@
+ <?php use \App\Http\Controllers\PurchaseController; ?>
 @extends('layouts.app', ['class' => 'bg-default'])
 
 @section('content')
@@ -23,74 +24,133 @@
 					 <form role="form" method="POST" action="{{ route('purchasedetails') }}">
 					 	@csrf
 
+
+					 		<div>
+					 			<div>
+					 				<div class="text-center text-muted mb-4">
+					 					<span>
+                                        	<i class="ni ni-box-2 text-primary"></i> Purchase Order Number <i class="text-primary">—</i>
+
+                                        </span>
+                           			
+                                        	<?php echo $val = PurchaseController::getPO() ;?>
+                                    </div>
+                       			</div>
+                                                                       
+                                   	<input type='hidden' name='ordno' value="<?php echo $val?>">
+                                  
+                       		</div>
+
+                       		<div>
+					 			<div>
+					 				<div class="text-center text-muted mb-4">
+					 					<span>
+                                        	<i class="ni ni-bullet-list-67 text-primary"></i> BOL Number <i class="text-primary">—</i>
+                                        </span>
+                           			
+                                        	<?php echo $val = PurchaseController::getBol() ;?>
+                                    </div>
+                       			</div>
+                                                                       
+                                    
+                                   	<input type='hidden' name='bolno' value="<?php echo $val?>">
+                                  
+                       		</div>
+
+                       		<div>
+					 			<div>
+					 				<div class="text-center text-muted mb-4">
+					 					<span>
+                                        	<i class="ni ni-align-center text-primary"></i> Invoice Number <i class="text-primary">—</i>
+                                        </span>
+                           			
+                                        	<?php echo $val = PurchaseController::getInvoice() ;?>
+                                    </div>
+                       			</div>
+                                                                       
+                                    
+                                    
+                                   	<input type='hidden' name='invoiceno' value="<?php echo $val?>">
+                                  
+                       		</div>
+					 		
+
+						
+
+
 							<div class="form-group">
 							    <div class="input-group input-group-alternative">
 							        <div class="input-group-prepend">
 							            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
 							        </div>
-							        <input class="form-control" id="date" name="date" placeholder="Order Date" type="text"/>
+							        <input class="form-control" id="date" name="date" placeholder="Order Date" type="text"  required autofocus/>
 							    </div>
 							</div>
 							
-
-							<div class="form-group{{ $errors->has('ordno') ? ' has-danger' : '' }}">
-                                <div class="input-group input-group-alternative mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-box-2"></i></span>
-                                    </div>
-                                    <input class="form-control{{ $errors->has('ordno') ? ' is-invalid' : '' }}" placeholder="{{ __('Order Number') }}" type="text" name="ordno" value="{{ old('ordno') }}" required autofocus>
-                                </div>
-                                @if ($errors->has('ordno'))
-                                    <span class="invalid-feedback" style="display: block;" role="alert">
-                                        <strong>{{ $errors->first('ordno') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-
-
-
-
-
-
-							<div class="form-group{{ $errors->has('bolno') ? ' has-danger' : '' }}">
-							    <div class="input-group input-group-alternative">
-							        <div class="input-group-prepend">
-							            <span class="input-group-text"><i class="ni ni-bullet-list-67"></i></span>
-							        </div>
-							        <input class="form-control{{ $errors->has('bolno') ? ' is-invalid' : '' }}" name="bolno" placeholder="BOL (Bill Of Lading) Number" type="text" value="{{ old('bolno') }}"/>
-							    </div>
-							    @if ($errors->has('bolno'))
-                                    <span class="invalid-feedback" style="display: block;" role="alert">
-                                        <strong>{{ $errors->first('bolno') }}</strong>
-                                    </span>
-                                @endif
-							</div>
-
-
 							<div class="form-group">
-							    <div class="input-group input-group-alternative">
-							        <div class="input-group-prepend">
-							            <span class="input-group-text"><i class="ni ni-align-center"></i></span>
-							        </div>
-							        <input class="form-control" name="invoiceno" placeholder="Invoice Number" type="text"/>
-							    </div>
-							</div>
-							<div class="form-group">
-							    <div class="input-group input-group-alternative">
-							        <div class="input-group-prepend">
-							            <span class="input-group-text"><i class="ni ni-cart"></i></span>
-							        </div>
-							        <input class="form-control" name="customer" placeholder="Customer" type="text"/>
-							    </div>
-							</div>
-							<div class="form-group">
-							    <div class="input-group input-group-alternative">
-							        <div class="input-group-prepend">
-							            <span class="input-group-text"><i class="ni ni-delivery-fast"></i></span>
-							        </div>
-							        <input class="form-control" name="distributor" placeholder="Distributor" type="text"/>
-							    </div>
-							</div>
+		                    <div class="input-group input-group-alternative">
+		                        <div class="input-group-prepend">
+		                            <span class="input-group-text"><i class="ni ni-cart"></i></span>
+		                        </div>
+		                  		 <select class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="customer">
+	                         		<option hidden value="" >Select Customer</option>
+	                      			@foreach( PurchaseController::getCustomers() as $item)
+
+	                      			<option value="{{ $item->customer }}">{{ $item->customer }}</option>
+	                      			@endforeach
+	                    		</select>
+		                    @if ($errors->has('search'))
+		                        <span class="invalid-feedback" role="alert">
+		                            <strong>{{ $errors->first('search') }}</strong>
+		                        </span>
+		                    @endif
+		                	</div>
+		           			</div>
+
+
+		           			<div class="form-group">
+		                    <div class="input-group input-group-alternative">
+		                        <div class="input-group-prepend">
+		                            <span class="input-group-text"><i class="ni ni-cart"></i></span>
+		                        </div>
+		                  		 <select class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="distributor">
+	                         		<option hidden value="" >Select Distributor</option>
+	                      			@foreach( PurchaseController::getDistributors() as $item)
+
+	                      			<option value="{{ $item->distributor }}">{{ $item->distributor }}</option>
+	                      			@endforeach
+	                    		</select>
+		                    @if ($errors->has('search'))
+		                        <span class="invalid-feedback" role="alert">
+		                            <strong>{{ $errors->first('search') }}</strong>
+		                        </span>
+		                    @endif
+		                	</div>
+		           			</div>
+
+		           			<div class="form-group">
+		                    <div class="input-group input-group-alternative">
+		                        <div class="input-group-prepend">
+		                            <span class="input-group-text"><i class="ni ni-cart"></i></span>
+		                        </div>
+		                  		 <select class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="productid">
+	                         		<option hidden value="" >Select Customer</option>
+	                      			@foreach( PurchaseController::getCustomers() as $item)
+
+	                      			<option value="{{ $item->customer }}">{{ $item->customer }}</option>
+	                      			@endforeach
+	                    		</select>
+		                    @if ($errors->has('search'))
+		                        <span class="invalid-feedback" role="alert">
+		                            <strong>{{ $errors->first('search') }}</strong>
+		                        </span>
+		                    @endif
+		                	</div>
+		           			</div>
+							
+
+
+
 							<div class="form-group">
 							    <div class="input-group input-group-alternative">
 							        <div class="input-group-prepend">

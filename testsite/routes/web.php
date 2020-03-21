@@ -63,3 +63,21 @@ Route::any('/search','PurchaseController@search')->name('search');
 Route::get('/close_order/{ordno?}', 'PurchaseController@closeOrder')->name('close_order');
 
 Route::get('/pdf','PurchaseController@pdf')->name('pdf');
+
+
+Route::get('/makeReport/{reportno?}','ReportController@makeReport')->name('makeReport');
+
+Route::post('/saveReport','ReportController@saveReport')->name('saveReport');
+
+Route::get('/reportForm','ReportController@reportForm')->name('reportForm');
+
+Route::get('/showReport','ReportController@showReport')->name('showReport');
+
+
+
+
+Route::get('/addProduct','ProductController@addProduct')->name('addProduct');
+
+Route::post('/storeProduct','ProductController@store')->name('storeProduct');
+
+Route::get('/viewProducts','ProductController@viewProducts')->name('viewProducts');

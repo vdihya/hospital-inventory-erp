@@ -45,6 +45,8 @@
     $(document).ready(function(){
       var date_input=$('input[name="date"]');
       var start_date=$('input[name="startdate"]'); 
+
+      var stockdate=$('input[name="date_of_stocking"]'); 
       var end_date=$('input[name="enddate"]');   //our date input has the name "date"
       var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
       var options={
@@ -56,6 +58,8 @@
       date_input.datepicker(options);
        start_date.datepicker(options);
         end_date.datepicker(options);
+
+        stockdate.datepicker(options);
     })
     </script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
