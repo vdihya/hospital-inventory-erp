@@ -1,8 +1,10 @@
- <?php use \App\Http\Controllers\PurchaseController; ?>
+ <?php use \App\Http\Controllers\PurchaseController; 
+ use \App\Http\Controllers\ProductController;
+
+use Illuminate\Http\Request;?>
 @extends('layouts.app', ['class' => 'bg-default'])
 
 @section('content')
-
 
    <div class="header bg-gradient-success py-7 py-lg-8">
         <div class="container">
@@ -74,9 +76,43 @@
                                   
                        		</div>
 					 		
+							<div class="form-group">
+		                    <div class="input-group input-group-alternative">
+		                        <div class="input-group-prepend">
+		                            <span class="input-group-text"><i class="ni ni-cart"></i></span>
+		                        </div>
+		                  		 <select class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="productid" onchange="
+		                  		 window.max = (getStock(this.value)); ">
 
-						
+	                         		<option hidden value="" >Select Product</option>
+	                      			@foreach( ProductController::getProducts() as $item)
 
+	                      			<option value="{{ $item->productid }}">{{ $item->product_name }}</option>
+	                      			
+	                      			@endforeach
+	                      			
+	                    		</select>
+		                    @if ($errors->has('search'))
+		                        <span class="invalid-feedback" role="alert">
+		                            <strong>{{ $errors->first('search') }}</strong>
+		                        </span>
+		                    @endif
+		                	</div>
+		           			</div>
+
+
+
+		           			<div class="form-group">
+							    <div class="input-group input-group-alternative">
+							        <div class="input-group-prepend">
+							            <span class="input-group-text"><i class="ni ni-money-coins"></i></span>
+							        </div>
+
+							       <input class="form-control" name="units" placeholder="units" type="number" step= "10" required autofocus onchange="console.log(window.max);checkStock(this.value,window.max);"/>
+
+
+							    </div>
+							</div>
 
 							<div class="form-group">
 							    <div class="input-group input-group-alternative">
@@ -128,25 +164,7 @@
 		                	</div>
 		           			</div>
 
-		           			<div class="form-group">
-		                    <div class="input-group input-group-alternative">
-		                        <div class="input-group-prepend">
-		                            <span class="input-group-text"><i class="ni ni-cart"></i></span>
-		                        </div>
-		                  		 <select class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="productid">
-	                         		<option hidden value="" >Select Customer</option>
-	                      			@foreach( PurchaseController::getCustomers() as $item)
-
-	                      			<option value="{{ $item->customer }}">{{ $item->customer }}</option>
-	                      			@endforeach
-	                    		</select>
-		                    @if ($errors->has('search'))
-		                        <span class="invalid-feedback" role="alert">
-		                            <strong>{{ $errors->first('search') }}</strong>
-		                        </span>
-		                    @endif
-		                	</div>
-		           			</div>
+		           			
 							
 
 
@@ -159,6 +177,7 @@
 							        <input class="form-control" name="soldto" placeholder="Sold to" type="text" required autofocus/>
 							    </div>
 							</div>
+
 							<div class="form-group">
 							    <div class="input-group input-group-alternative">
 							        <div class="input-group-prepend">
@@ -187,3 +206,36 @@
         </div>
 
 @endsection
+<script>
+function getStock(id) {
+	var max;
+    $.ajax({
+        type: "get",
+        url: "getStock",
+        async: false,
+        data: "productid=" + id,
+        success: function(result) {
+         	max = result;
+         }
+    });
+    return max;
+};
+function checkStock(units,allowed) {
+	var res;
+    $.ajax({
+        type: "get",
+        url: "checkStock",
+
+        async: false,
+        data: { units: units, allowed: allowed },
+        success: function(result) {
+           if(result == 1)
+           	alert("Units must be less than "+allowed);
+
+          
+        }
+    });
+     
+
+};
+</script>

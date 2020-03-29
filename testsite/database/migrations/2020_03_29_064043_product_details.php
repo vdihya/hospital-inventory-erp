@@ -23,6 +23,8 @@ class ProductDetails extends Migration
             $table->integer('active_stock')->nullable();
             
             $table->timestamp('added_at')->useCurrent();
+            
+            $table->bigInteger('all_time_purchase_value')->default(0);
             });
     }
 

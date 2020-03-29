@@ -81,3 +81,13 @@ Route::get('/addProduct','ProductController@addProduct')->name('addProduct');
 Route::post('/storeProduct','ProductController@store')->name('storeProduct');
 
 Route::get('/viewProducts','ProductController@viewProducts')->name('viewProducts');
+
+Route::get('/checkStock','ProductController@checkStock')->name('checkStock');
+
+Route::get('/getStock','ProductController@getStock')->name('getStock');
+
+Route::get('/deleteProduct','ProductController@deleteProduct')->name('deleteProduct');
+
+Route::get('/getProduct','ProductController@getProduct')->name('getProduct');
+
+Route::get('/updateStock','ProductController@updateStock')->name('updateStock');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use DataTables;
 use Illuminate\Http\Request;
 use App\PurchaseOrder;
+use App\Product;
 use Illuminate\Support\Facades\Auth;
 use PDF;
 
@@ -33,6 +34,8 @@ class PurchaseController extends Controller
     }
     public function store()
     {
+        PurchaseController::updateUnits(request('productid'),request('units'));
+
         $order = new PurchaseOrder;
         
         $order->ordno = request('ordno');
@@ -44,9 +47,18 @@ class PurchaseController extends Controller
         $order->soldto = request('soldto');
         $order->type = request('type');
         $order->added_by=Auth::user()->name;
+        $order->productid = request('productid');
+        $order->units = request('units');
         $order->save();
 
       return redirect('/purchases');
+    }
+
+    public static function updateUnits($productid,$units)
+    {
+      Product::where('productid',$productid)->increment('all_time_purchase_value',$units);
+      Product::where('productid',$productid)->decrement('active_stock',$units);
+
     }
     public function view()
     {

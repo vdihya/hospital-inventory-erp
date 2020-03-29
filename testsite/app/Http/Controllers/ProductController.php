@@ -40,4 +40,46 @@ class ProductController extends Controller
         return $array[rand(0,25)] . $array[rand(0,25)] . $array[rand(0,25)] . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9);
 
     }
+
+    public static function getProducts()
+    {
+        return Product::sortable()->paginate();
+    }
+
+    public static function getStock(Request $request)
+    {
+        return Product::where('productid',$request->productid)->value('active_stock');
+        
+    }
+
+    public static function getProduct(Request $request)
+    {
+        return Product::where('productid',$request->productid)->first();
+        
+    }
+
+    public static function updateStock(Request $request)
+    {
+       Product::where('productid',$request->productid)->increment('active_stock',$request->units);
+
+        return redirect('/viewProducts');
+        
+    }
+
+    public static function deleteProduct(Request $request)
+    {
+        Product::where('productid',$request->productid)->delete();
+
+        return redirect('/viewProducts');
+
+    }
+    public static function checkStock(Request $request)
+    {
+      if($request->units > $request->allowed) return 1;
+      else return 0;
+        
+
+    }
+ 
+    
 }
