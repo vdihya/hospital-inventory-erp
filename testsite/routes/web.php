@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 use App\PurchaseOrder;
 
 Route::get('/', function () {
@@ -52,6 +54,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
+
+
+// Routes for Purchase Orders
 Route::get('/formpurchaseinfo','PurchaseController@show')->name('formpurchaseinfo');;
 
 Route::post('/purchasedetails','PurchaseController@store')->name('purchasedetails');;
@@ -62,9 +67,8 @@ Route::any('/search','PurchaseController@search')->name('search');
 
 Route::get('/close_order/{ordno?}', 'PurchaseController@closeOrder')->name('close_order');
 
-Route::get('/pdf','PurchaseController@pdf')->name('pdf');
 
-
+// Routes for Reports !REDUNDANT!
 Route::get('/makeReport/{reportno?}','ReportController@makeReport')->name('makeReport');
 
 Route::post('/saveReport','ReportController@saveReport')->name('saveReport');
@@ -75,7 +79,7 @@ Route::get('/showReport','ReportController@showReport')->name('showReport');
 
 
 
-
+// Routes for Products
 Route::get('/addProduct','ProductController@addProduct')->name('addProduct');
 
 Route::post('/storeProduct','ProductController@store')->name('storeProduct');
@@ -91,3 +95,18 @@ Route::get('/deleteProduct','ProductController@deleteProduct')->name('deleteProd
 Route::get('/getProduct','ProductController@getProduct')->name('getProduct');
 
 Route::get('/updateStock','ProductController@updateStock')->name('updateStock');
+
+
+
+// Routes for PDFReport creation
+
+Route::get('/POreportform','PurchaseController@POreportform')->name('POreportform');
+
+Route::get('/PROreportform','ProductController@PROreportform')->name('PROreportform');
+
+Route::get('/USERreportform','UserController@USERreportform')->name('USERreportform');
+
+Route::get('/POpdf','PurchaseController@POpdf')->name('POpdf');
+
+Route::get('/PROpdf','ProductController@PROpdf')->name('PROpdf');
+

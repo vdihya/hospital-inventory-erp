@@ -36,16 +36,7 @@
 							    </div>
 							</div>
 
-                            <div class="form-group">
-							    <div class="input-group input-group-alternative">
-							        <div class="input-group-prepend">
-							            <span class="input-group-text">
-                                        	<i class="ni ni-bullet-list-67"></i></span>
-							        </div>
-
-							        <input class="form-control" name="report_type" placeholder="Type of report" type="" required autofocus/>
-							    </div>
-							</div>
+                            
 
 					 		
 
@@ -104,7 +95,7 @@
                                         	
                                         </span>
 
-							        <input class="form-control" name="group_by_field" placeholder="Group by clause" type="" required autofocus/>
+							        <input class="form-control" name="group_by_field" placeholder="Group by" type="" required autofocus/>
                                     </div>
 
                                    

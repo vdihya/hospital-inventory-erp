@@ -131,13 +131,18 @@
                     <div class="collapse show" id="navbar-examples">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('reportForm') }}">
-                                  <i class="ni ni-active-40 text-primary"></i>    {{ __('Create Report') }}
+                                <a class="nav-link" href="{{ route('POreportform') }}">
+                                  <i class="ni ni-sound-wave text-dark"></i>    {{ __('Purchase Orders') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('showReport') }}">
-                                   <i class="ni ni-sound-wave text-dark"></i> {{ __('View Reports') }}
+                                <a class="nav-link" href="{{ route('PROreportform') }}">
+                                   <i class="ni ni-sound-wave text-dark"></i> {{ __('Products') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('USERreportform') }}">
+                                   <i class="ni ni-sound-wave text-dark"></i> {{ __('Users') }}
                                 </a>
                             </li>
                         </ul>

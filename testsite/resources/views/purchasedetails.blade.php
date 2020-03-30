@@ -212,18 +212,14 @@
         </div>
     </div>
     <div class="container">
-    <div class="row">
+ 
         <div class="col">
-            <button type="button" class="btn btn-dark"><a href="/purchases">View original data</a></button>
-        </div>
-        <div class="col">
-            <button type="button" class="btn btn-dark"><a href="/pdf">Export into PDF</a></button>
+            <button type="button" class="btn btn-sucess"><a href="/purchases">View original</a></button>
         </div>
         
         
         
-    </div>
-</div>
+ </div>
 </div>
 
         <div class="separator separator-bottom separator-skew zindex-100">

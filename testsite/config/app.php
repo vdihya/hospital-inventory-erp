@@ -176,7 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
-        Yajra\DataTables\DataTablesServiceProvider::class,
+        
         Barryvdh\DomPDF\ServiceProvider::class,
 
     ],

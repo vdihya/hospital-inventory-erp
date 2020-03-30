@@ -14,10 +14,11 @@ class ReportController extends Controller
 		$reports = Report::where('reportno', $request->reportno)->first();
 		$chart_options = [
         'chart_title' => $reports->chart_title,
-        'report_type' => $reports->report_type,
+        'report_type' => 'group_by_string',
         'model' => 'App\\' . $reports->model,
         'group_by_field' => $reports->group_by_field,
         'chart_type' => $reports->chart_type,
+    'aggregate_field' => 'amount',
     
     ];
 		$chart = new LaravelChart($chart_options);
@@ -31,7 +32,7 @@ class ReportController extends Controller
         $report->chart_title = request('chart_title');
         $report->chart_type= request('chart_type');
         $report->group_by_field= request('group_by_field');
-        $report->report_type= request('report_type');
+        $report->report_type= 'group_by_field';
         $report->model = request('model');
       
         $report->save();

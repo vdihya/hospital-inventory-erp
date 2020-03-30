@@ -83,4 +83,10 @@ class UserController extends Controller
 
         return redirect()->route('user.index')->withStatus(__('User successfully deleted.'));
     }
+
+    public function USERreportform()
+    {
+        $users = User::paginate();
+        return view('USERreportform',compact('users'));
+    }
 }

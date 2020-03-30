@@ -80,6 +80,113 @@ class ProductController extends Controller
         
 
     }
- 
+
+    public function PROreportform()
+    {
+        $products = Product::sortable()->paginate();
+        return view('PROreportform',compact('products'));
+    }
+    
+    public function PROpdf(Request $request)
+        {
+          $pdf = \App::make('dompdf.wrapper');
+          $pdf-> loadHTML(ProductController::convert_products($request));
+          return $pdf->stream();
+        }
+
+        public function convert_products(Request $request)
+        {
+          $products = ProductController::Productsearch($request);
+          $output = '
+                    <table style="border-collapse:collapse; border:1px;">
+                        <tr>
+                             <th style="border:1px solid; padding:3px;">
+                              Product ID
+                            </th>
+                             <th style="border:1px solid; padding:3px;">
+                              Product Name
+                            </th>
+                             <th style="border:1px solid; padding:3px;">
+                              Current Stock 
+                               </th>
+                             <th style="border:1px solid; padding:3px;">
+                                Date of Stocking
+                                </th>
+                             <th style="border:1px solid; padding:3px;">
+                                Total Purchased Units
+                            </th>
+                            
+                        </tr>
+                    </thead>';
+                    foreach($products as $product)
+                    {
+                      $output .= '
+                <tr text-align-center>
+                     <td>' .$product->productid.' </td>
+                    <td><b>' .$product->product_name. '<b></td>
+                    <td>' .$product->active_stock. '</td>
+                    <td>' .$product->date_of_stocking.'</td>
+                    <td>' .$product->all_time_purchase_value. '</td>
+                    
+
+                   
+                </tr>';
+                    }
+        $output.= '</table>';
+        return $output;
+
+
+        }
+        public function Productsearch(Request $request)
+        {
+            $s = $request->search;
+
+            $startdate = $request->startdate;
+            $enddate = $request->enddate;
+
+            $activestart = $request->activestart;
+            $activeend = $request->activeend;
+            
+
+            $alltimestart = $request->alltimestart;
+            $alltimeend = $request->alltimeend;
+
+
+
+            if($s!=null)
+                {
+                    $orders = Product::where('productid','LIKE','%'.$s.'%')->orWhere('date_of_stocking','LIKE','%'.$s.'%')->orWhere('active_stock','LIKE','%'.$s.'%')->orWhere('all_time_purchase_value','LIKE','%'.$s.'%')->orWhere('product_name','LIKE','%'.$s.'%')->sortable()->get();
+         
+                }
+
+            if($enddate!=null || $startdate!=null)
+                {
+
+                    $orders = Product::where('date_of_stocking','>=',date($startdate))->orWhere('date_of_stocking','<=',date($enddate))->sortable()->get();
+                }
+
+            if($activestart!=null)                {
+                    $orders = Product::where('active_stock','>=',($activestart))->get();
+             
+                }
+            
+            if($activeend!=null)                {
+                    $orders = Product::where('active_stock','<=',($activeend))->get();
+             
+                }
+
+            if($alltimestart!=null)                {
+                    $orders = Product::where('all_time_purchase_value','>=',($alltimestart))->get();
+             
+                }
+            
+            if($alltimeend!=null)                {
+                    $orders = Product::where('all_time_purchase_value','<=',($alltimeend))->get();
+             
+                }
+            return $orders;
+
+
+        }
     
 }

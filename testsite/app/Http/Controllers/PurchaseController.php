@@ -70,8 +70,9 @@ class PurchaseController extends Controller
      
     }
 
-    public function search(Request $request)
+    public static function subsearch(Request $request)
     {
+
 
         $c = $request->customers;
          $d= $request->distributors;
@@ -100,18 +101,21 @@ class PurchaseController extends Controller
             if($enddate!=null || $startdate!=null)
             {
 
-                $orders = PurchaseOrder::whereBetween('date', [$startdate, $enddate])->sortable()->get();
+               $orders = Product::where('date_of_stocking','>=',date($startdate))->orWhere('date_of_stocking','<=',date($enddate))->sortable()->get();
             }
             if($status!=null)
             {
 
                 $orders = PurchaseOrder::where('status','LIKE',$status)->sortable()->get();
             }
-
+            return $orders;
              
 
-
-             $customers = PurchaseOrder::groupBy('customer')->get();
+    }
+    public function search(Request $request)
+    {
+            $orders = PurchaseController::subsearch($request);
+            $customers = PurchaseOrder::groupBy('customer')->get();
                $distributors = PurchaseOrder::groupBy('distributor')->get();
             return view ('purchasedetails',compact(
                 'customers','orders','distributors'));
@@ -127,23 +131,18 @@ class PurchaseController extends Controller
                  return redirect('/purchases');
         }
 
-        function get_purchase_orders()
-        {
-          $purchase_orders = PurchaseOrder::get();
-          return $purchase_orders;
-        }
-
-        function pdf()
+       
+        public function POpdf(Request $request)
         {
           $pdf = \App::make('dompdf.wrapper');
-          $pdf-> loadHTML($this->convert_purchase_orders());
+          $pdf-> loadHTML(PurchaseController::convert_purchase_orders($request));
           return $pdf->stream();
         }
 
 
-        function convert_purchase_orders()
+        public function convert_purchase_orders(Request $request)
         {
-          $purchase_orders = $this->get_purchase_orders();
+          $purchase_orders = PurchaseController::subsearch($request);
           $output = '
                     <table style="border-collapse:collapse; border:1px;">
                         <tr>
@@ -232,6 +231,14 @@ class PurchaseController extends Controller
        {
          return PurchaseOrder::groupBy('distributor')->get()->filter();
      
+       }
+       public function POreportform()
+       {
+          $orders = PurchaseOrder::sortable()->paginate();
+        //$search =  PurchaseOrder::sortable()->paginate();
+       $customers = PurchaseOrder::groupBy('customer')->get();
+       $distributors = PurchaseOrder::groupBy('distributor')->get();
+        return view('POreportform',compact('orders','customers','distributors'));
        }
 
 }

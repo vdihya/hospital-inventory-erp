@@ -15,8 +15,8 @@
         "laravel-frontend-presets/argon": "^1.0",
         "laravel/tinker": "^2.0",
         "laraveldaily/laravel-charts": "^0.1.15",
-        "mews/captcha": "^3.0",
-        "yajra/laravel-datatables": "1.5"
+        "maatwebsite/excel": "^3.1",
+        "mews/captcha": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
