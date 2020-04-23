@@ -18,7 +18,6 @@ class ReportController extends Controller
         'model' => 'App\\' . $reports->model,
         'group_by_field' => $reports->group_by_field,
         'chart_type' => $reports->chart_type,
-    'aggregate_field' => 'amount',
     
     ];
 		$chart = new LaravelChart($chart_options);

@@ -4,7 +4,7 @@
 <div class="header bg-gradient-dark py-7 py-lg-8">
         <div class="container">
                     <div class="col-lg-5 col-md-6">
-                        <h1 class="text-white">Recent Purchase orders</h1>
+                        <h1 class="text-white">Recently Stocked Products</h1>
                     </div>
                 
         </div>

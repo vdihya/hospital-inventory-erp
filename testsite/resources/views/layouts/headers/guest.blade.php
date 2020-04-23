@@ -4,7 +4,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-6">
                     <h1 class="text-white">Welcome to 
-                    boxy</h1>
+                    HospERP</h1>
                 </div>
             </div>
         </div>

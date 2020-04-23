@@ -3,7 +3,7 @@
     <div class="container px-4">
         <a class="navbar-brand" href="{{ route('home') }}">
             <div class="col-lg-5 col-md-6">
-                      <h2><i class="ni ni-shop text-default"></i> {{ __('boxy') }}
+                      <h2><i class="ni ni-fat-add text-light"></i> {{ __('Hospital ERP') }}
          				</h2>
             </div>
         </a>
